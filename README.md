@@ -30,6 +30,6 @@ brew install Eigen
 brew install gflags
 ```
 
-If homebrew is not installed, follow the official [Eigen instructions](http://eigen.tuxfamily.org/index.php?title=Main_Page#Download), the official [cmake instructions](https://cmake.org/install/)
+If homebrew is not installed, follow the official [Eigen instructions](http://eigen.tuxfamily.org/index.php?title=Main_Page#Download), the official [cmake instructions](https://cmake.org/install/),
 and the official [gflags instructions](https://gflags.github.io/gflags/) to install
 the required dependencies.
