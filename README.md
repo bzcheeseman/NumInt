@@ -33,4 +33,5 @@ brew install gflags
 If homebrew is not installed, follow the official [Eigen instructions](http://eigen.tuxfamily.org/index.php?title=Main_Page#Download), the official [cmake instructions](https://cmake.org/install/),
 and the official [gflags instructions](https://gflags.github.io/gflags/) to install
 the required dependencies.  For Eigen, if it's installed in a place other than /usr/local/include/eigen3 then change the -I flag in the CMakeLists.txt file (line 4)
+
 `set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -I <put your install here>")`
