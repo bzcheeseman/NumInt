@@ -16,6 +16,11 @@ DEFINE_string(current_path, "", "Specifies where the CODE files are starting fro
 int main(int argc, char* argv[]) {
   google::ParseCommandLineFlags(&argc, &argv, false);
 
+  if (FLAGS_current_path == ""){
+    cout << "Need a file path, see README or run with the --help flag for more." << endl;
+    return -1;
+  }
+
   std::complex<float> ii (0.0, 1.0);
 
   std::complex<float> Delta, J, zero, one;
