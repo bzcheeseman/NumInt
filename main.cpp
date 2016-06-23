@@ -1,12 +1,20 @@
 #include <iostream>
 #include <Eigen/Dense>
 #include <fstream>
+#include <gflags/gflags.h>
+
+#include <stdlib.h>
+#include <unistd.h>
 
 #include "Solver.hpp"
 
 using namespace std;
 
-int main() {
+DEFINE_string(current_path, "", "Specifies where the CODE files are starting from the top directory");
+
+
+int main(int argc, char* argv[]) {
+  google::ParseCommandLineFlags(&argc, &argv, false);
 
   std::complex<float> ii (0.0, 1.0);
 
@@ -34,12 +42,27 @@ int main() {
 
   /////////////Plotting mechanics that I'll put elsewhere later/////////////
 
-  ofstream re0 ("/users/aman/code/NumericalIntegration/r0.tsv");
-  ofstream re1 ("/users/aman/code/NumericalIntegration/r1.tsv");
-  ofstream im0 ("/users/aman/code/NumericalIntegration/i0.tsv");
-  ofstream im1 ("/users/aman/code/NumericalIntegration/i1.tsv");
+  char buff[PATH_MAX];
 
-  ofstream out_file ("/users/aman/code/NumericalIntegration/output_data.txt");
+  char* cwd = getcwd(buff, PATH_MAX+1);
+
+  string path;
+
+  if (cwd != NULL){
+    path = cwd;
+  }
+  else{
+    cout << "cwd is null";
+    return 0;
+  }
+
+
+  ofstream re0 ((path + "r0.tsv").c_str());
+  ofstream re1 ((path + "r1.tsv").c_str());
+  ofstream im0 ((path + "i0.tsv").c_str());
+  ofstream im1 ((path + "i1.tsv").c_str());
+
+  ofstream out_file ((path + "output_data.txt").c_str());
 
   out_file << "Real and then Imaginary parts" << std::endl;
   for (int i = 0; i < 2; i++){
@@ -87,7 +110,7 @@ int main() {
   im0.close();
   im1.close();
 
-  system("python /users/aman/code/NumericalIntegration/plot.py");
+  system(("python " + FLAGS_current_path + "/plot.py " + path).c_str()); //yes this is jank, but boost.python isn't working right now
 
   return 0;
 }

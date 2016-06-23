@@ -1,16 +1,18 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import sys
 
-def main():
 
-    x0 = np.genfromtxt("/users/aman/code/NumericalIntegration/r0.tsv")
-    x1 = np.genfromtxt("/users/aman/code/NumericalIntegration/r1.tsv")
-    y0 = np.genfromtxt("/users/aman/code/NumericalIntegration/i0.tsv")
-    y1 = np.genfromtxt("/users/aman/code/NumericalIntegration/i1.tsv")
+def main(path):
+
+    x0 = np.genfromtxt(path + "r0.tsv")
+    x1 = np.genfromtxt(path + "r1.tsv")
+    y0 = np.genfromtxt(path + "i0.tsv")
+    y1 = np.genfromtxt(path + "i1.tsv")
 
     plt.figure()
     plt.title("Complex Plane")
-    plt.plot(x0, y0, label = "Cavity 1 (Starts here)")
+    plt.plot(x0, y0, label = "Cavity 1 (Mode starts here)")
     plt.plot(x1, y1, label = "Cavity 2")
     plt.legend()
     plt.show()
@@ -24,4 +26,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1])
