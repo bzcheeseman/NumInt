@@ -8,7 +8,7 @@ make
 ```
 
 In order to play around with parameters, look in the `main.cpp` file,
-should be self explanatory.
+should be self explanatory.  Change parameters and sizing as desired.
 
 TO DO:
 * Make it easier to change the system size
