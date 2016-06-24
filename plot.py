@@ -13,14 +13,14 @@ def main(path):
     plt.figure()
     plt.title("Complex Plane")
     plt.plot(x0, y0, label = "Cavity 1 (Mode starts here)")
-    plt.plot(x1, y1, label = "Cavity 2")
+    plt.plot(x1, y1, label = "Cavity 2 (Detuned by Delta)")
     plt.legend()
     plt.show()
 
     plt.figure()
     plt.title("Squared Amplitudes")
-    plt.plot(xrange(len(x0)), np.sqrt(x0**2 + y0**2), label = "Cavity 1")
-    plt.plot(xrange(len(x1)), np.sqrt(x1**2 + y1**2), label = "Cavity 2")
+    plt.plot(xrange(len(x0)), x0**2 + y0**2, label = "Cavity 1 (Mode starts here)")
+    plt.plot(xrange(len(x1)), x1**2 + y1**2, label = "Cavity 2 (Detuned by Delta)")
     plt.legend()
     plt.show()
 
