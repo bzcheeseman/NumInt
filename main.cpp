@@ -1,41 +1,42 @@
 #include <iostream>
+//#include "Solver_v0.1.hpp"
 #include "Solver.hpp"
 
 using namespace std;
 
-
 int main(int argc, char* argv[]) {
   google::ParseCommandLineFlags(&argc, &argv, false);
 
-  std::complex<float> ii (0.0, 1.0);
-
-  std::complex<float> Delta, J, zero, one;
+  std::complex<double> Delta, J, zero, one;
 
   Delta = -1.0;
   J = 0.1;
   zero = 0.0;
   one = 1.0;
 
-  Eigen::MatrixXcf Ham (2,2); //haven't tested it on more than a 2 level system but it *should* still work
-  Ham << Delta, J, J, zero;
+  Eigen::MatrixXcd Ham (3,3);
+  Ham << Delta, J, zero, J, zero, J, zero, J, zero;
 
-  Eigen::VectorXcf initial (2); //haven't tested it on more than a 2 level system but it *should* still work
-  initial << one, zero;
+  std::vector<double> init = {1.0, 0.0, 0.0};
 
-  Solver<float> solver (Ham, initial, ii);
+  //Solver_v0<float> solver (Ham, initial, ii);
 
   long num_runs = 7000;
-  float step_size = 0.001;
+  double step_size = 0.001;
 
-  Eigen::MatrixXcf output = solver.Solve(step_size, num_runs);
+  Solver slvr (num_runs, step_size, 3, Ham.data(), 9);
 
-  try{
-    solver.logSolution(output, num_runs);
-    solver.plotSolution(output, num_runs, step_size);
-  }
-  catch (const std::exception& e){
-    std::cout << e.what() << std::endl;
-  }
+  std::cout << slvr.Solve(init) << std::endl;
+
+//  Eigen::MatrixXcf output = solver.Solve(step_size, num_runs);
+//
+//  try{
+//    solver.logSolution(output, num_runs);
+//    //solver.plotSolution(output, num_runs, step_size);
+//  }
+//  catch (const std::exception& e){
+//    std::cout << e.what() << std::endl;
+//  }
 
   return 0;
 }
