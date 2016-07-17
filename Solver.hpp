@@ -89,7 +89,7 @@ protected:
 //Public interface to the evaluate function
 public:
   inline MatrixXt Solve(T step_size, std::size_t num_steps){
-    MatrixXt solution (2, 1);
+    MatrixXt solution (3, 1);
 
     solution.col(0) = Psi_0;
 
